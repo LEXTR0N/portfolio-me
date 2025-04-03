@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  portfolio:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # Personal information to be injected at build time
+        - PERSONAL_NAME=${PERSONAL_NAME:-Jonas Eck}
+        - PERSONAL_ROLE=${PERSONAL_ROLE:-Full-Stack Developer}
+        - PERSONAL_TAGLINE=${PERSONAL_TAGLINE:-specializing in modern web technologies}
+        - PERSONAL_EMAIL=${PERSONAL_EMAIL:-jonas.eck@example.com}
+        - PERSONAL_LOCATION=${PERSONAL_LOCATION:-Schweinfurt, Germany}
+        - PERSONAL_GITHUB=${PERSONAL_GITHUB:-LEXTR0N}
+        - PERSONAL_LINKEDIN=${PERSONAL_LINKEDIN:-maxmustermann}
+        - PERSONAL_XING=${PERSONAL_XING:-maxmustermann}
+    container_name: portfolio
+    ports:
+      - "${PORT:-8080}:8080"
+    environment:
+      # Server configuration
+      - SERVER_PORT=8080
+      
+      # Email configuration
+      - EMAIL_HOST=${EMAIL_HOST:-smtp.example.com}
+      - EMAIL_PORT=${EMAIL_PORT:-587}
+      - EMAIL_USERNAME=${EMAIL_USERNAME:-your-email@example.com}
+      - EMAIL_PASSWORD=${EMAIL_PASSWORD:-your-password}
+      - EMAIL_FROM=${EMAIL_FROM:-your-email@example.com}
+      - EMAIL_TO=${EMAIL_TO:-recipient@example.com}
+      
+      # CORS configuration
+      - ALLOWED_ORIGINS=${ALLOWED_ORIGINS:-http://localhost:8080}
+    restart: unless-stopped
+    volumes:
+      # Optional: Mount a volume for persistent data if needed
+      - portfolio-data:/app/data
+
+volumes:
+  portfolio-data:

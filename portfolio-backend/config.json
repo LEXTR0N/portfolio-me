@@ -1,0 +1,13 @@
+{
+    "server": {
+      "port": "8080"
+    },
+    "email": {
+      "host": "mail.lextron.dev", 
+      "port": 587,
+      "username": "contact-form@lextron.dev",
+      "password": "9QtH^r&A*^",
+      "from": "contact-form@lextron.dev",
+      "to": "jonas.eck@lextron.dev"
+    }
+  }
