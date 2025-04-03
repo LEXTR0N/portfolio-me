@@ -1,0 +1,11 @@
+<!-- src/app/components/modal/modal.component.html -->
+<div class="modal-overlay" [class.open]="isOpen" (click)="onOverlayClick($event)">
+    <div class="modal-container">
+      <button class="modal-close-button" (click)="onClose()">
+        <span>&times;</span>
+      </button>
+      <div class="modal-content">
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,37 @@
+<!-- src/app/components/footer/footer.component.html -->
+<div class="footer-container">
+  <div class="container">
+    <div class="footer-content">
+      <div class="logo-section">
+        <p *ngIf="displayIfExists(config.footer.tagline)">{{config.footer.tagline}}</p>
+      </div>
+      
+      <div class="links-section">
+        <div class="link-group">
+          <h3 *ngIf="displayIfExists(config.footer.labels.pages)">{{config.footer.labels.pages}}</h3>
+          <ul>
+            <li><a routerLink="/">{{config.header.navigation.home}}</a></li>
+            <li><a routerLink="/about">{{config.header.navigation.about}}</a></li>
+            <li><a routerLink="/skills">{{config.header.navigation.skills}}</a></li>
+            <li><a routerLink="/projects">{{config.header.navigation.projects}}</a></li>
+          </ul>
+        </div>
+        
+        <div class="link-group">
+          <h3 *ngIf="displayIfExists(config.footer.labels.connect)">{{config.footer.labels.connect}}</h3>
+          <ul>
+            <li><a href="https://twitter.com/{{config.contact.xing}}" target="_blank">Xing</a></li>
+            <li><a href="https://linkedin.com/in/{{config.contact.linkedin}}" target="_blank">LinkedIn</a></li>
+            <li><a href="https://github.com/{{config.contact.github}}" target="_blank">GitHub</a></li>
+            <li><a [href]="'mailto:' + config.contact.email">Email</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p class="copyright" *ngIf="displayIfExists(config.footer.copyrightName)">&copy; {{currentYear}} {{config.footer.copyrightName}}. All rights reserved.</p>
+      <div class="made-with" *ngIf="displayIfExists(config.footer.credits)" [innerHTML]="config.footer.credits"></div>
+    </div>
+  </div>
+</div>

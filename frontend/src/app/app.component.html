@@ -1,0 +1,11 @@
+<!-- src/app/app.component.html -->
+<header></header>
+<main>
+  <router-outlet></router-outlet>
+</main>
+<footer></footer>
+
+<!-- Global Contact Modal -->
+<app-modal [isOpen]="isContactModalOpen" (close)="closeContactModal()">
+  <app-contact-form></app-contact-form>
+</app-modal>

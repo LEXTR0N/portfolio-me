@@ -1,0 +1,107 @@
+<div class="projects-container">
+  <div class="projects-header">
+    <h1>{{config.projects.title}}</h1>
+    <p class="projects-intro">{{config.projects.introduction}}</p>
+  </div>
+
+  <!-- Featured Projects Section -->
+  <div class="featured-projects" *ngIf="featuredProjects.length > 0">
+    <h2>Featured Projects</h2>
+    <div class="featured-grid">
+      <div class="featured-project" *ngFor="let project of featuredProjects">
+        <div class="project-image">
+          <div class="featured-badge">Featured</div>
+          <img [src]="getProjectImage(project.image)" [alt]="project.title">
+        </div>
+        <div class="project-content">
+          <h3>{{project.title}}</h3>
+          <p class="project-subtitle">{{project.subtitle}}</p>
+          <p class="project-description">{{project.description}}</p>
+          <div class="project-technologies">
+            <span class="technology" *ngFor="let tech of project.technologies">{{tech}}</span>
+          </div>
+          <div class="project-links">
+            <a *ngIf="hasLink(project, 'live')" [href]="getLink(project, 'live')" class="btn btn-primary" target="_blank">
+              <span class="icon">🔗</span>
+              <span>Live Demo</span>
+            </a>
+            <a *ngIf="hasLink(project, 'github')" [href]="getLink(project, 'github')" class="btn btn-secondary" target="_blank">
+              <span class="icon">💻</span>
+              <span>GitHub</span>
+            </a>
+            <a *ngIf="hasLink(project, 'behance')" [href]="getLink(project, 'behance')" class="btn btn-tertiary" target="_blank">
+              <span class="icon">🎨</span>
+              <span>Behance</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- All Projects Section -->
+  <div class="all-projects">
+    <h2>All Projects</h2>
+    
+    <!-- Filter Buttons -->
+    <div class="project-filters">
+      <button 
+        *ngFor="let filter of filters" 
+        [class.active]="activeFilter === filter.id"
+        (click)="filterProjects(filter.id)">
+        {{filter.label}}
+      </button>
+    </div>
+    
+    <!-- Projects Grid -->
+    <div class="projects-grid">
+      <div class="project-card" *ngFor="let project of filteredProjects">
+        <div class="project-image">
+          <img [src]="getProjectImage(project.image)" [alt]="project.title">
+          <div class="project-date">{{project.date}}</div>
+        </div>
+        <div class="project-content">
+          <h3>{{project.title}}</h3>
+          <p class="project-subtitle">{{project.subtitle}}</p>
+          <div class="project-technologies">
+            <span class="technology" *ngFor="let tech of project.technologies.slice(0, 3)">{{tech}}</span>
+            <span class="more-tech" *ngIf="project.technologies.length > 3">+{{project.technologies.length - 3}}</span>
+          </div>
+          
+          <!-- Updated project description with read more link -->
+          <div class="project-description-container">
+            <p class="project-description">{{project.description}}</p>
+            <button class="read-more-button" (click)="openProjectModal(project)">Read More</button>
+          </div>
+          
+          <div class="project-links">
+            <a *ngIf="hasLink(project, 'live')" [href]="getLink(project, 'live')" class="btn btn-sm btn-primary" target="_blank">
+              <span class="icon">🔗</span>
+              <span>Demo</span>
+            </a>
+            <a *ngIf="hasLink(project, 'github')" [href]="getLink(project, 'github')" class="btn btn-sm btn-secondary" target="_blank">
+              <span class="icon">💻</span>
+              <span>Code</span>
+            </a>
+            <a *ngIf="hasLink(project, 'behance')" [href]="getLink(project, 'behance')" class="btn btn-sm btn-tertiary" target="_blank">
+              <span class="icon">🎨</span>
+              <span>Design</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- No Results Message -->
+    <div class="no-projects" *ngIf="filteredProjects.length === 0">
+      <p>No projects found for the selected filter. Try another category.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Project Detail Modal -->
+<app-project-detail-modal 
+  [isOpen]="isProjectModalOpen" 
+  [project]="selectedProject"
+  (close)="closeProjectModal()">
+</app-project-detail-modal>

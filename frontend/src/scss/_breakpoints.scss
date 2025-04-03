@@ -1,0 +1,73 @@
+// src/scss/_breakpoints.scss
+@use "sass:map";
+
+// Breakpoint Variablen
+$breakpoint-xs: 320px;
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+$breakpoint-xxl: 1400px;
+
+// Map für einfacheren Zugriff
+$breakpoints: (
+  "xs": $breakpoint-xs,
+  "sm": $breakpoint-sm,
+  "md": $breakpoint-md,
+  "lg": $breakpoint-lg,
+  "xl": $breakpoint-xl,
+  "xxl": $breakpoint-xxl
+);
+
+// Mixins für Media Queries
+@mixin breakpoint-up($breakpoint) {
+  @if map.has-key($breakpoints, $breakpoint) {
+    @media (min-width: map.get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  } @else {
+    @warn "Unbekannter Breakpoint: #{$breakpoint}. "
+          + "Verfügbare Breakpoints sind: #{map.keys($breakpoints)}";
+  }
+}
+
+@mixin breakpoint-down($breakpoint) {
+  @if map.has-key($breakpoints, $breakpoint) {
+    @media (max-width: (map.get($breakpoints, $breakpoint) - 0.02)) {
+      @content;
+    }
+  } @else {
+    @warn "Unbekannter Breakpoint: #{$breakpoint}. "
+          + "Verfügbare Breakpoints sind: #{map.keys($breakpoints)}";
+  }
+}
+
+@mixin breakpoint-between($lower, $upper) {
+  @if map.has-key($breakpoints, $lower) and map.has-key($breakpoints, $upper) {
+    @media (min-width: map.get($breakpoints, $lower)) and (max-width: (map.get($breakpoints, $upper) - 0.02)) {
+      @content;
+    }
+  } @else {
+    @warn "Unbekannte Breakpoints: #{$lower} oder #{$upper}. "
+          + "Verfügbare Breakpoints sind: #{map.keys($breakpoints)}";
+  }
+}
+
+// Beispiel-Mixin für häufig verwendete Gerätetypen
+@mixin for-mobile {
+  @include breakpoint-down('sm') {
+    @content;
+  }
+}
+
+@mixin for-tablet {
+  @include breakpoint-between('sm', 'lg') {
+    @content;
+  }
+}
+
+@mixin for-desktop {
+  @include breakpoint-up('lg') {
+    @content;
+  }
+}

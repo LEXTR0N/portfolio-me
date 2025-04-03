@@ -1,0 +1,52 @@
+<!-- src/app/components/project-detail-modal/project-detail-modal.component.html -->
+<div class="project-modal-overlay" [class.open]="isOpen" (click)="onOverlayClick($event)">
+    <div class="project-modal-container" *ngIf="project">
+      <button class="modal-close-button" (click)="onClose()">
+        <span>&times;</span>
+      </button>
+      
+      <div class="project-modal-content">
+        <div class="project-header">
+          <div class="project-image">
+            <img [src]="project.image" [alt]="project.title">
+          </div>
+          <div class="project-title">
+            <h2>{{project.title}}</h2>
+            <p class="project-subtitle">{{project.subtitle}}</p>
+            <div class="project-date">{{project.date}}</div>
+          </div>
+        </div>
+        
+        <div class="project-body">
+          <div class="project-technologies">
+            <h3>Technologies</h3>
+            <div class="tech-tags">
+              <span class="technology" *ngFor="let tech of project.technologies">{{tech}}</span>
+            </div>
+          </div>
+          
+          <div class="project-description">
+            <h3>Description</h3>
+            <p>{{project.description}}</p>
+          </div>
+        </div>
+        
+        <div class="project-footer">
+          <div class="project-links">
+            <a *ngIf="hasLink('live')" [href]="getLink('live')" class="btn btn-primary" target="_blank">
+              <span class="icon">🔗</span>
+              <span>View Live Demo</span>
+            </a>
+            <a *ngIf="hasLink('github')" [href]="getLink('github')" class="btn btn-secondary" target="_blank">
+              <span class="icon">💻</span>
+              <span>View on GitHub</span>
+            </a>
+            <a *ngIf="hasLink('behance')" [href]="getLink('behance')" class="btn btn-tertiary" target="_blank">
+              <span class="icon">🎨</span>
+              <span>View on Behance</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

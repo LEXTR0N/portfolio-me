@@ -1,0 +1,468 @@
+@use '../../../scss/breakpoints' as b;
+
+.projects-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  
+  @include b.breakpoint-down('md') {
+    padding: 3rem 1.5rem;
+  }
+  
+  @include b.breakpoint-down('sm') {
+    padding: 2rem 1rem;
+  }
+}
+
+.projects-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  
+  h1 {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+    
+    @include b.breakpoint-down('md') {
+      font-size: 2.4rem;
+    }
+    
+    @include b.breakpoint-down('sm') {
+      font-size: 2rem;
+    }
+  }
+  
+  .projects-intro {
+    max-width: 700px;
+    margin: 0 auto;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    
+    @include b.breakpoint-down('md') {
+      font-size: 1rem;
+    }
+  }
+}
+
+// Section headings
+h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+  position: relative;
+  display: inline-block;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 40%;
+    height: 3px;
+    background: var(--accent-gradient);
+    border-radius: 2px;
+  }
+  
+  @include b.breakpoint-down('md') {
+    font-size: 1.6rem;
+    margin-bottom: 1.2rem;
+  }
+  
+  @include b.breakpoint-down('sm') {
+    font-size: 1.4rem;
+  }
+}
+
+// Featured Projects Section
+.featured-projects {
+  margin-bottom: 4rem;
+  
+  @include b.breakpoint-down('md') {
+    margin-bottom: 3rem;
+  }
+}
+
+.featured-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  
+  @include b.breakpoint-down('md') {
+    gap: 2rem;
+  }
+}
+
+.featured-project {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  background-color: var(--background-card);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px var(--shadow);
+  
+  @include b.breakpoint-down('md') {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  
+  &:nth-child(even) {
+    .project-image {
+      order: 2;
+      
+      @include b.breakpoint-down('md') {
+        order: 1;
+      }
+    }
+    
+    .project-content {
+      order: 1;
+      
+      @include b.breakpoint-down('md') {
+        order: 2;
+      }
+    }
+  }
+  
+  .project-image {
+    position: relative;
+    height: 100%;
+    min-height: 300px;
+    
+    @include b.breakpoint-down('md') {
+      height: 250px;
+    }
+    
+    @include b.breakpoint-down('sm') {
+      height: 200px;
+    }
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .featured-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: var(--accent-gradient);
+      color: white;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      z-index: 1;
+    }
+  }
+  
+  .project-content {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    
+    @include b.breakpoint-down('md') {
+      padding: 1.5rem;
+    }
+    
+    h3 {
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+      
+      @include b.breakpoint-down('md') {
+        font-size: 1.4rem;
+      }
+    }
+    
+    .project-subtitle {
+      color: var(--accent);
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+    
+    .project-description {
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+      flex-grow: 1;
+    }
+  }
+
+  .project-technologies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    
+    .technology {
+      background-color: var(--background-dark);
+      color: var(--text-secondary);
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+    }
+  }
+  
+}
+
+// Filter Buttons
+.project-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-bottom: 2rem;
+  
+  @include b.breakpoint-down('sm') {
+    justify-content: center;
+  }
+  
+  button {
+    background-color: var(--background-card);
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px var(--shadow);
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px var(--shadow);
+      color: var(--text-primary);
+    }
+    
+    &.active {
+      background: var(--accent-gradient);
+      color: white;
+    }
+  }
+}
+
+// Projects Grid
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+  
+  @include b.breakpoint-down('sm') {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.project-card {
+  background-color: var(--background-card);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px var(--shadow);
+    
+    .project-image img {
+      transform: scale(1.05);
+    }
+    
+    .read-more-button {
+      color: var(--primary);
+    }
+  }
+  
+  .project-image {
+    position: relative;
+    height: 180px;
+    overflow: hidden;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .project-date {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 0.3rem 0.8rem;
+      font-size: 0.8rem;
+      border-top-left-radius: 8px;
+    }
+  }
+  
+  .project-content {
+    padding: 1.5rem;
+    
+    h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.4rem;
+      color: var(--text-primary);
+    }
+    
+    .project-subtitle {
+      color: var(--accent);
+      font-size: 0.9rem;
+      margin-bottom: 0.8rem;
+      font-weight: 500;
+    }
+    
+    .project-technologies {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      
+      .technology {
+        background-color: var(--background-dark);
+        color: var(--text-secondary);
+        padding: 0.2rem 0.6rem;
+        border-radius: 4px;
+        font-size: 0.8rem;
+      }
+      
+      .more-tech {
+        font-size: 0.8rem;
+        color: var(--text-light);
+      }
+    }
+    
+    // Updated project description styles
+    .project-description-container {
+      position: relative;
+      margin-bottom: 1.2rem;
+      
+      .project-description {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        line-height: 1.5;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        margin-bottom: 0.5rem;
+      }
+      
+      .read-more-button {
+        background: none;
+        border: none;
+        color: var(--accent);
+        font-size: 0.85rem;
+        padding: 0;
+        cursor: pointer;
+        font-weight: 500;
+        position: relative;
+        transition: transform 0.2s;
+        
+        &::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: -2px;
+          width: 100%;
+          height: 1px;
+          background-color: var(--accent);
+          transform: scaleX(0);
+          transform-origin: right;
+          transition: transform 0.3s ease;
+        }
+        
+        &:hover {
+          transform: translateX(3px);
+          
+          &::after {
+            transform: scaleX(1);
+            transform-origin: left;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Project Links
+.project-links {
+  display: flex;
+  gap: 0.8rem;
+  
+  @include b.breakpoint-down('sm') {
+    flex-wrap: wrap;
+  }
+  
+  a.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    // Normal size buttons (featured projects)
+    &:not(.btn-sm) {
+      padding: 0.7rem 1.2rem;
+      font-size: 0.95rem;
+    }
+    
+    // Small buttons (project cards)
+    &.btn-sm {
+      padding: 0.5rem 0.8rem;
+      font-size: 0.85rem;
+    }
+    
+    .icon {
+      font-size: 1.1em;
+    }
+    
+    &.btn-primary {
+      background: var(--accent-gradient);
+      color: white;
+    }
+    
+    &.btn-secondary {
+      background-color: var(--background-dark);
+      color: var(--text-primary);
+    }
+    
+    &.btn-tertiary {
+      background-color: transparent;
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+    }
+  }
+}
+
+// No projects message
+.no-projects {
+  margin-top: 2rem;
+  text-align: center;
+  padding: 2rem;
+  background-color: var(--background-card);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px var(--shadow);
+  
+  p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+  }
+}

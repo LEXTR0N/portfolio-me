@@ -1,0 +1,25 @@
+# Node/Angular
+frontend/node_modules
+frontend/dist
+frontend/.angular
+frontend/.cache
+frontend/npm-debug.log
+frontend/yarn-error.log
+
+# Go
+backend/dist
+backend/vendor
+backend/.env
+
+# Sensible Daten
+backend/config.json
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# System
+.DS_Store
+Thumbs.db

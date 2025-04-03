@@ -1,0 +1,146 @@
+// src/app/components/contact-form/contact-form.component.scss
+@use '../../../scss/breakpoints' as b;
+
+.contact-form-container {
+    width: 100%;
+
+    h2 {
+        font-family: var(--font-heading);
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+    }
+
+    .form-description {
+        color: var(--text-secondary);
+        margin-bottom: 2rem;
+    }
+}
+
+.form-success,
+.form-error {
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+
+    .success-message {
+        color: #2ecc71;
+    }
+
+    .error-message {
+        color: #e74c3c;
+    }
+}
+
+.form-success {
+    background-color: rgba(46, 204, 113, 0.1);
+    border: 1px solid rgba(46, 204, 113, 0.3);
+}
+
+.form-error {
+    background-color: rgba(231, 76, 60, 0.1);
+    border: 1px solid rgba(231, 76, 60, 0.3);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+
+        label {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        input,
+        textarea {
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background-color: var(--background);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            transition: border-color 0.2s, box-shadow 0.2s;
+
+            &:focus {
+                outline: none;
+                border-color: var(--accent);
+                box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+            }
+
+            &.invalid {
+                border-color: #e74c3c;
+            }
+
+            &::placeholder {
+                color: var(--text-light);
+            }
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+
+            // Scrollbar-Styling
+            &::-webkit-scrollbar {
+                width: 8px;
+            }
+
+            &::-webkit-scrollbar-track {
+                background: var(--background);
+                border-radius: 4px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background: var(--primary-light);
+                border-radius: 4px;
+            }
+
+            &::-webkit-scrollbar-thumb:hover {
+                background: var(--primary);
+            }
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+    }
+
+    .form-actions {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 1rem;
+
+        @include b.breakpoint-down('sm') {
+            justify-content: stretch;
+        }
+
+        .submit-button {
+            padding: 0.8rem 2rem;
+            background: var(--accent-gradient);
+            color: white;
+            font-weight: 600;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+
+            @include b.breakpoint-down('sm') {
+                width: 100%;
+            }
+
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+            }
+        }
+    }
+}

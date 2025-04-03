@@ -1,0 +1,108 @@
+/* src/styles.scss */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Hauptfarbpalette - Verbesserte Kontraste für Light Mode */
+  --primary: #1e3a5f;            /* Dunkleres Blau für bessere Lesbarkeit */
+  --primary-light: #2c5282;      /* Angepasst für besseren Kontrast */
+  --primary-dark: #0d2240;       /* Dunkler für mehr Tiefe */
+  --accent: #2563eb;             /* Kräftigeres Blau für Akzente */
+  --accent-gradient: linear-gradient(135deg, #2563eb, #8b5cf6);  /* Intensiverer Gradient */
+  
+  /* Hintergrund-Varianten mit mehr Kontrast */
+  --background: #f1f5f9;         /* Leicht grauer Hintergrund */
+  --background-card: #ffffff;    /* Weiß für Karten bleibt */
+  --background-dark: #e2e8f0;    /* Dunklerer Hintergrund für bestimmte Elemente */
+  
+  /* Text-Farben mit mehr Kontrast */
+  --text-primary: #0f172a;       /* Dunklerer Text für bessere Lesbarkeit */
+  --text-secondary: #334155;     /* Dunkler sekundärer Text */
+  --text-light: #64748b;         /* Hellerer, aber noch gut lesbarer Text */
+  
+  /* UI-Elemente mit besserer Sichtbarkeit */
+  --border: #cbd5e1;             /* Sichtbarere Rahmen */
+  --shadow: rgba(15, 23, 42, 0.08);  /* Etwas dunklere Schatten */
+
+  /* Typografie */
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-body: 'Outfit', sans-serif;
+  
+  /* Responsive Breakpoints */
+  --breakpoint-desktop: 992px;  /* Desktop und größer */
+  --breakpoint-tablet: 768px;   /* Tablet (768px bis 991px) */
+  --breakpoint-mobile: 767px;   /* Mobil (unter 768px) */
+}
+
+/* Dark Mode bleibt unverändert */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary: #3498db;
+    --primary-light: #5dade2;
+    --primary-dark: #2980b9;
+    --accent: #9b59b6;
+    --accent-gradient: linear-gradient(135deg, #3498db, #9b59b6);
+    
+    --background: #121212;
+    --background-card: #1e1e24;
+    --background-dark: #0a0a0a;
+    
+    --text-primary: #ecf0f1;
+    --text-secondary: #bdc3c7;
+    --text-light: #95a5a6;
+    
+    --border: #2c3e50;
+    --shadow: rgba(0, 0, 0, 0.25);
+  }
+}
+
+
+/* Globale Styles bleiben weitgehend unverändert */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--background);
+  color: var(--text-primary);
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 40%;
+  height: 100vh;
+  background: var(--accent-gradient);
+  opacity: 0.03;
+  z-index: -1;
+  clip-path: polygon(30% 0, 100% 0, 100% 100%, 0 100%);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+}
+
+/* Container-Klasse mit responsiven Anpassungen */
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+a {
+  color: var(--primary);
+  transition: color 0.3s ease;
+  text-decoration: none;
+}
+
+button {
+  font-family: var(--font-body);
+}

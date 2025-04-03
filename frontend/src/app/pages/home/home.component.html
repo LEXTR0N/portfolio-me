@@ -1,0 +1,62 @@
+<!-- src/app/pages/home/home.component.html -->
+<div class="home-container">
+  <div class="content">
+    <div class="intro">
+      <div class="greeting">
+        <h2 *ngIf="displayIfExists(config.home.greeting.prefix) || displayIfExists(config.home.greeting.name)">
+          <ng-container
+            *ngIf="displayIfExists(config.home.greeting.prefix)">{{config.home.greeting.prefix}}</ng-container>
+          <ng-container *ngIf="displayIfExists(config.home.greeting.name)"> {{config.home.greeting.name}}</ng-container>
+        </h2>
+      </div>
+
+      <h1
+        *ngIf="displayIfExists(config.home.headline.prefix) || displayIfExists(config.home.headline.highlight) || displayIfExists(config.home.headline.suffix)">
+        <ng-container *ngIf="displayIfExists(config.home.headline.prefix)">{{config.home.headline.prefix}}
+        </ng-container>
+        <span class="highlight"
+          *ngIf="displayIfExists(config.home.headline.highlight)">{{config.home.headline.highlight}}</span>
+        <ng-container *ngIf="displayIfExists(config.home.headline.suffix)">
+          {{config.home.headline.suffix}}</ng-container>
+      </h1>
+
+      <p class="bio" *ngIf="displayIfExists(config.home.biography)">{{config.home.biography}}</p>
+
+      <div class="cta-buttons">
+        <button class="cta-button primary" *ngIf="displayIfExists(config.home.ctaButtons.primary.text)"
+          [routerLink]="config.home.ctaButtons.primary.link">
+          {{config.home.ctaButtons.primary.text}}
+        </button>
+        <button class="cta-button secondary" *ngIf="displayIfExists(config.home.ctaButtons.secondary.text)"
+          (click)="openContactModal()">
+          {{config.home.ctaButtons.secondary.text}}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="profile-section">
+    <div class="profile-wrapper">
+      <div class="profile-background"></div>
+      <div class="profile-image">
+        <img src="assets/images/profil.png" alt="Profile Image">
+      </div>
+      <div class="profile-stats">
+        <div class="stat"
+          *ngIf="displayIfExists(config.home.stats.stat_0.value) || displayIfExists(config.home.stats.stat_0.label)">
+          <span class="number"
+            *ngIf="displayIfExists(config.home.stats.stat_0.value)">{{config.home.stats.stat_0.value}}</span>
+          <span class="label"
+            *ngIf="displayIfExists(config.home.stats.stat_0.label)">{{config.home.stats.stat_0.label}}</span>
+        </div>
+        <div class="stat"
+          *ngIf="displayIfExists(config.home.stats.stat_1.value) || displayIfExists(config.home.stats.stat_1.label)">
+          <span class="number"
+            *ngIf="displayIfExists(config.home.stats.stat_1.value)">{{config.home.stats.stat_1.value}}</span>
+          <span class="label"
+            *ngIf="displayIfExists(config.home.stats.stat_1.label)">{{config.home.stats.stat_1.label}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,63 @@
+<div class="skills-container">
+  <div class="skills-header">
+    <h1>{{config.skills.title}}</h1>
+    <p class="skills-intro">{{config.skills.introduction}}</p>
+  </div>
+
+  <!-- Mobile category navigation -->
+  <div class="category-tabs-mobile">
+    <div class="tabs-label">Categories:</div>
+    <select [(ngModel)]="activeCategory" (ngModelChange)="setActiveCategory($event)">
+      <option *ngFor="let category of categories; let i = index" [ngValue]="i">
+        {{category.name}}
+      </option>
+    </select>
+  </div>
+
+  <!-- Desktop view with sidebar navigation -->
+  <div class="skills-content">
+    <!-- Category navigation sidebar (desktop) -->
+    <div class="category-tabs-desktop">
+      <button 
+        *ngFor="let category of categories; let i = index"
+        class="category-tab"
+        [class.active]="i === activeCategory"
+        (click)="setActiveCategory(i)">
+        {{category.name}}
+      </button>
+    </div>
+
+    <!-- Skills display area -->
+    <div class="skills-display">
+      <div class="skills-section" *ngFor="let category of categories; let i = index" [class.visible]="i === activeCategory">
+        <h2>{{category.name}}</h2>
+        <p class="category-description">{{category.description}}</p>
+
+        <div class="skills-grid">
+          <div class="skill-card" *ngFor="let skill of category.skills">
+            <div class="skill-header">
+              <h3>{{skill.name}}</h3>
+              <div class="skill-years" *ngIf="skill.yearsExperience">
+                {{skill.yearsExperience}} {{ skill.yearsExperience === 1 ? 'year' : 'years' }}
+              </div>
+            </div>
+
+            <div class="skill-level">
+              <div class="stars">
+                <span class="star filled" *ngFor="let star of getStars(skill.level)">★</span>
+                <span class="star empty" *ngFor="let star of getEmptyStars(skill.level)">☆</span>
+              </div>
+              <div class="level-description">{{getLevelDescription(skill.level)}}</div>
+            </div>
+
+            <div class="skill-bar-container">
+              <div class="skill-bar" [style.width]="getSkillBarWidth(skill.level)" [attr.data-level]="skill.level"></div>
+            </div>
+
+            <p class="skill-description" *ngIf="skill.description">{{skill.description}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
