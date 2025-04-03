@@ -1,5 +1,11 @@
 // src/app/config/projects-config.ts
+import { inject } from '@angular/core';
+import { ConfigService } from '../services/config.service';
 import { PersonalConfig } from './personal-config';
+
+// Get config from the config service
+const configService = inject(ConfigService);
+const externalConfig = configService.getConfig();
 
 // Functions for easily creating link URLs
 const createGithubLink = (repo: string) =>
@@ -12,8 +18,8 @@ const getProjectImage = (filename: string) =>
   `${PersonalConfig.images.projects}${filename}`;
 
 export const ProjectsConfig = {
-  title: "My Projects",
-  introduction: "Here's a collection of projects I've worked on, including my personal projects, university projects, and professional work.",
+  title: externalConfig?.projects?.title || 'PROJECTS_TITLE',
+  introduction: externalConfig?.projects?.introduction || 'PROJECTS_INTRODUCTION',
 
   // Project filter categories
   filters: [

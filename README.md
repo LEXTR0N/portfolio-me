@@ -1,170 +1,119 @@
-# Portfolio Application - Setup and Run Instructions
+# Portfolio-Anwendung konfigurieren
 
-This guide explains how to set up and run your portfolio application with Docker or for local development.
+Diese Anleitung erklärt, wie du die Portfolio-Anwendung einrichten und alle Texte und Inhalte individuell anpassen kannst.
 
-## Preparation
+## Umgebungsvariablen für Inhalte
 
-Before you begin, make sure you have:
-- Git
-- Docker and Docker Compose (for Docker setup)
-- Node.js and npm (for local development)
-- Go 1.22+ (for local development)
+Alle Texte und persönlichen Informationen auf der Website können über Umgebungsvariablen angepasst werden. Wenn eine Umgebungsvariable nicht definiert ist, wird der Name der Variable als Platzhalter angezeigt (z.B. "PERSONAL_NAME"), damit du weißt, welche Variable du setzen musst.
 
-## Directory Structure
+### Variablen in der .env-Datei
 
-First, ensure your project is structured correctly:
-
-```
-project-root/
-├── portfolio-frontend/       # Frontend Angular application
-├── portfolio-backend/        # Backend Go application
-├── docker-compose.yml        # Docker Compose configuration
-├── Dockerfile                # Multi-stage Docker build file
-└── .env                      # Environment variables (create from .env.example)
-```
-
-## Option 1: Run with Docker (Recommended)
-
-The Docker setup builds and runs both the frontend and backend in a single container:
-
-1. **Create a .env file**
-
+1. Erstelle eine `.env`-Datei im Hauptverzeichnis deines Projekts:
    ```bash
    cp .env.example .env
    ```
 
-2. **Customize your .env file**
+2. Bearbeite die `.env`-Datei und fülle alle Variablen aus, die du anpassen möchtest.
 
-   Edit the `.env` file and add your actual information, especially:
-   - Email configuration (for contact form)
-   - Personal information (for portfolio content)
+### Hauptkategorien von Umgebungsvariablen
 
-3. **Build and run with Docker Compose**
+#### Persönliche Informationen
+```
+PERSONAL_NAME=Max Mustermann
+PERSONAL_ROLE=Full-Stack Developer
+PERSONAL_TAGLINE=specializing in modern web technologies
+PERSONAL_EMAIL=max@example.com
+PERSONAL_LOCATION=Berlin, Germany
+PERSONAL_BIRTHDATE=January 1, 1990
+PERSONAL_GITHUB=maxmustermann
+PERSONAL_LINKEDIN=maxmustermann
+PERSONAL_XING=maxmustermann
+PERSONAL_BEHANCE=maxmustermann
+```
 
-   ```bash
-   docker-compose up -d
-   ```
+#### Startseite (Home)
+```
+HOME_GREETING_PREFIX=Hello, I'm
+HOME_HEADLINE_PREFIX=I build
+HOME_HEADLINE_HIGHLIGHT=amazing web applications
+HOME_HEADLINE_SUFFIX=for everyone
+HOME_BIOGRAPHY=Kurze Beschreibung über dich...
+HOME_CTA_PRIMARY_TEXT=Meine Projekte
+HOME_CTA_SECONDARY_TEXT=Kontakt
+HOME_STAT_0_VALUE=42
+HOME_STAT_0_LABEL=Projekte abgeschlossen
+HOME_STAT_1_VALUE=5+
+HOME_STAT_1_LABEL=Jahre Erfahrung
+```
 
-4. **Access your application**
+#### Über mich (About)
+```
+ABOUT_TITLE=Über mich
+ABOUT_INTRODUCTION=Längere Einführung über dich...
+ABOUT_BIO_1=Erster Absatz der Bio...
+ABOUT_BIO_2=Zweiter Absatz der Bio...
+```
 
-   Open your browser and navigate to: http://localhost:8080
+#### Fähigkeiten (Skills)
+```
+SKILLS_TITLE=Meine Fähigkeiten
+SKILLS_INTRODUCTION=Einführung zu deinen Fähigkeiten...
+```
 
-5. **View logs (if needed)**
+#### Projekte
+```
+PROJECTS_TITLE=Meine Projekte
+PROJECTS_INTRODUCTION=Einführung zu deinen Projekten...
+```
 
-   ```bash
-   docker-compose logs -f
-   ```
+#### Footer
+```
+FOOTER_TAGLINE=Persönlicher Slogan im Footer
+FOOTER_CREDITS=Made with ❤ by Max Mustermann
+```
 
-6. **Stop the application**
+## Mit Docker ausführen
 
-   ```bash
-   docker-compose down
-   ```
+Am einfachsten kannst du die Anwendung mit Docker starten:
 
-## Option 2: Local Development Setup
+```bash
+docker-compose up -d
+```
 
-For local development, you'll need to run the frontend and backend separately:
+Docker wird automatisch alle deine Umgebungsvariablen aus der `.env`-Datei lesen und in das Frontend injizieren.
 
-### Backend Setup
+## Ohne Docker ausführen
 
-1. **Navigate to the backend directory**
+Wenn du ohne Docker entwickeln möchtest, musst du:
 
+1. Das Backend starten:
    ```bash
    cd portfolio-backend
-   ```
-
-2. **Set environment variables**
-
-   You can set these in your terminal session:
-
-   ```bash
-   export SERVER_PORT=8080
-   export EMAIL_HOST=your-smtp-server.com
-   export EMAIL_PORT=587
-   export EMAIL_USERNAME=your-email@example.com
-   export EMAIL_PASSWORD=your-password
-   export EMAIL_FROM=your-email@example.com
-   export EMAIL_TO=recipient@example.com
-   export ALLOWED_ORIGINS=http://localhost:4200
-   ```
-
-   Or create a `.env` file in the backend directory and use a tool like `direnv` to load it.
-
-3. **Run the backend**
-
-   ```bash
    go run main.go
    ```
 
-   The backend will start at: http://localhost:8080
-
-### Frontend Setup
-
-1. **Navigate to the frontend directory**
-
+2. Das Frontend konfigurieren und starten:
    ```bash
    cd portfolio-frontend
+   
+   # Erstelle eine assets/config.json mit deinen Einstellungen
+   mkdir -p src/assets
+   # Kopiere die Einstellungen manuell in eine config.json-Datei
+   
+   # Starte das Frontend
+   npm run start
    ```
 
-2. **Install dependencies**
+## Hinzufügen eigener Projekte, Fähigkeiten oder Erfahrungen
 
-   ```bash
-   npm install
-   ```
+Für komplexere Daten wie Projekte, Fähigkeiten oder Erfahrungen musst du die entsprechenden Config-Dateien im Frontend bearbeiten:
 
-3. **Start the development server**
+- `src/app/config/projects-config.ts` für Projekte
+- `src/app/config/skills-config.ts` für Fähigkeiten
+- `src/app/config/about-config.ts` für Bildung und Berufserfahrung
 
-   ```bash
-   ng serve
-   ```
+Diese Daten werden derzeit nicht über Umgebungsvariablen konfiguriert, da sie komplexer strukturiert sind.
 
-   The frontend will start at: http://localhost:4200
+## Fehlende Einstellungen identifizieren
 
-4. **Build for production**
-
-   To build the frontend for production use, run:
-
-   ```bash
-   ng build
-   ```
-
-   This will create a `dist` directory with the built application.
-
-5. **Copy the built frontend to the backend**
-
-   After building, copy the frontend files to the backend's static files directory:
-
-   ```bash
-   mkdir -p ../portfolio-backend/dist
-   cp -r dist/browser ../portfolio-backend/dist/
-   ```
-
-## Troubleshooting
-
-### Common Issues:
-
-1. **Backend can't find frontend files**
-
-   Make sure the frontend is built and its files are in the `portfolio-backend/dist/browser` directory.
-
-2. **Contact form doesn't work**
-
-   Check the email configuration in your environment variables.
-
-3. **CORS issues**
-
-   Ensure `ALLOWED_ORIGINS` includes the URL where your frontend is running (e.g., `http://localhost:4200`).
-
-4. **Docker build fails**
-
-   Check if all files are in the correct locations and Docker has access to them.
-
-5. **Go module issues**
-
-   If you get Go module errors, try:
-   ```bash
-   cd portfolio-backend
-   go mod tidy
-   ```
-
-For additional help, refer to the Docker and Angular documentation.
+Wenn du die Anwendung startest, werden alle fehlenden Einstellungen durch Platzhalter angezeigt (z.B. "PERSONAL_NAME"), damit du leicht erkennen kannst, welche Einstellungen noch fehlen.

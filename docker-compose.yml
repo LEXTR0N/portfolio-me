@@ -5,16 +5,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      args:
-        # Personal information to be injected at build time
-        - PERSONAL_NAME=${PERSONAL_NAME:-Jonas Eck}
-        - PERSONAL_ROLE=${PERSONAL_ROLE:-Full-Stack Developer}
-        - PERSONAL_TAGLINE=${PERSONAL_TAGLINE:-specializing in modern web technologies}
-        - PERSONAL_EMAIL=${PERSONAL_EMAIL:-jonas.eck@example.com}
-        - PERSONAL_LOCATION=${PERSONAL_LOCATION:-Schweinfurt, Germany}
-        - PERSONAL_GITHUB=${PERSONAL_GITHUB:-LEXTR0N}
-        - PERSONAL_LINKEDIN=${PERSONAL_LINKEDIN:-maxmustermann}
-        - PERSONAL_XING=${PERSONAL_XING:-maxmustermann}
     container_name: portfolio
     ports:
       - "${PORT:-8080}:8080"
@@ -29,6 +19,67 @@ services:
       - EMAIL_PASSWORD=${EMAIL_PASSWORD:-your-password}
       - EMAIL_FROM=${EMAIL_FROM:-your-email@example.com}
       - EMAIL_TO=${EMAIL_TO:-recipient@example.com}
+      
+      # Personal information
+      - PERSONAL_NAME=${PERSONAL_NAME}
+      - PERSONAL_ROLE=${PERSONAL_ROLE}
+      - PERSONAL_TAGLINE=${PERSONAL_TAGLINE}
+      - PERSONAL_EMAIL=${PERSONAL_EMAIL}
+      - PERSONAL_LOCATION=${PERSONAL_LOCATION}
+      - PERSONAL_BIRTHDATE=${PERSONAL_BIRTHDATE}
+      - PERSONAL_GITHUB=${PERSONAL_GITHUB}
+      - PERSONAL_LINKEDIN=${PERSONAL_LINKEDIN}
+      - PERSONAL_XING=${PERSONAL_XING}
+      - PERSONAL_BEHANCE=${PERSONAL_BEHANCE}
+      
+      # Image paths
+      - PERSONAL_IMAGE_PROFILE=${PERSONAL_IMAGE_PROFILE}
+      - PERSONAL_IMAGE_LOGO_LIGHT=${PERSONAL_IMAGE_LOGO_LIGHT}
+      - PERSONAL_IMAGE_LOGO_DARK=${PERSONAL_IMAGE_LOGO_DARK}
+      
+      # Home page configuration
+      - HOME_GREETING_PREFIX=${HOME_GREETING_PREFIX}
+      - HOME_HEADLINE_PREFIX=${HOME_HEADLINE_PREFIX}
+      - HOME_HEADLINE_HIGHLIGHT=${HOME_HEADLINE_HIGHLIGHT}
+      - HOME_HEADLINE_SUFFIX=${HOME_HEADLINE_SUFFIX}
+      - HOME_BIOGRAPHY=${HOME_BIOGRAPHY}
+      - HOME_CTA_PRIMARY_TEXT=${HOME_CTA_PRIMARY_TEXT}
+      - HOME_CTA_PRIMARY_LINK=${HOME_CTA_PRIMARY_LINK}
+      - HOME_CTA_SECONDARY_TEXT=${HOME_CTA_SECONDARY_TEXT}
+      - HOME_CTA_SECONDARY_LINK=${HOME_CTA_SECONDARY_LINK}
+      - HOME_STAT_0_VALUE=${HOME_STAT_0_VALUE}
+      - HOME_STAT_0_LABEL=${HOME_STAT_0_LABEL}
+      - HOME_STAT_1_VALUE=${HOME_STAT_1_VALUE}
+      - HOME_STAT_1_LABEL=${HOME_STAT_1_LABEL}
+      
+      # About page configuration
+      - ABOUT_TITLE=${ABOUT_TITLE}
+      - ABOUT_INTRODUCTION=${ABOUT_INTRODUCTION}
+      - ABOUT_BIO_1=${ABOUT_BIO_1}
+      - ABOUT_BIO_2=${ABOUT_BIO_2}
+      - ABOUT_SECTION_EDUCATION=${ABOUT_SECTION_EDUCATION}
+      - ABOUT_SECTION_EXPERIENCE=${ABOUT_SECTION_EXPERIENCE}
+      - ABOUT_SECTION_PERSONAL=${ABOUT_SECTION_PERSONAL}
+      
+      # Skills page configuration
+      - SKILLS_TITLE=${SKILLS_TITLE}
+      - SKILLS_INTRODUCTION=${SKILLS_INTRODUCTION}
+      
+      # Projects page configuration
+      - PROJECTS_TITLE=${PROJECTS_TITLE}
+      - PROJECTS_INTRODUCTION=${PROJECTS_INTRODUCTION}
+      
+      # Footer configuration
+      - FOOTER_TAGLINE=${FOOTER_TAGLINE}
+      - FOOTER_LABEL_PAGES=${FOOTER_LABEL_PAGES}
+      - FOOTER_LABEL_CONNECT=${FOOTER_LABEL_CONNECT}
+      - FOOTER_CREDITS=${FOOTER_CREDITS}
+      
+      # Header navigation
+      - HEADER_NAV_HOME=${HEADER_NAV_HOME}
+      - HEADER_NAV_ABOUT=${HEADER_NAV_ABOUT}
+      - HEADER_NAV_SKILLS=${HEADER_NAV_SKILLS}
+      - HEADER_NAV_PROJECTS=${HEADER_NAV_PROJECTS}
       
       # CORS configuration
       - ALLOWED_ORIGINS=${ALLOWED_ORIGINS:-http://localhost:8080}

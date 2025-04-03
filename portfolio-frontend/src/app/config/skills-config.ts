@@ -1,8 +1,14 @@
 // src/app/config/skills-config.ts
+import { inject } from '@angular/core';
+import { ConfigService } from '../services/config.service';
+
+// Get config from the config service
+const configService = inject(ConfigService);
+const externalConfig = configService.getConfig();
 
 export const SkillsConfig = {
-  title: "My Skills",
-  introduction: "Here's an overview of my technical abilities and expertise across various technologies, tools, and languages.",
+  title: externalConfig?.skills?.title || 'SKILLS_TITLE',
+  introduction: externalConfig?.skills?.introduction || 'SKILLS_INTRODUCTION',
   
   // Skill categories - add, remove or modify as needed
   categories: [

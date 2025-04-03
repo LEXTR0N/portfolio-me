@@ -16,4 +16,7 @@ func RegisterRoutes(mux *http.ServeMux) {
 
 	// Contact form endpoint
 	mux.HandleFunc("/api/contact", handlers.HandleContactForm)
+
+	// Configuration endpoint
+	mux.HandleFunc("/api/config", handlers.HandleConfig)
 }

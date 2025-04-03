@@ -1,0 +1,220 @@
+<div class="config-container">
+    <div class="config-header">
+      <h1>Portfolio Konfiguration</h1>
+      <p>Hier kannst du die Inhalte deiner Portfolio-Website bearbeiten.</p>
+    </div>
+  
+    <div *ngIf="saveSuccess" class="alert alert-success">
+      Konfiguration erfolgreich gespeichert!
+    </div>
+    <div *ngIf="saveError" class="alert alert-error">
+      Fehler beim Speichern der Konfiguration. Bitte versuche es erneut.
+    </div>
+  
+    <div class="config-tabs">
+      <button [class.active]="activeTab === 'personal'" (click)="setActiveTab('personal')">Persönliches</button>
+      <button [class.active]="activeTab === 'home'" (click)="setActiveTab('home')">Startseite</button>
+      <button [class.active]="activeTab === 'about'" (click)="setActiveTab('about')">Über mich</button>
+      <button [class.active]="activeTab === 'projects'" (click)="setActiveTab('projects')">Projekte</button>
+      <button [class.active]="activeTab === 'skills'" (click)="setActiveTab('skills')">Fähigkeiten</button>
+      <button [class.active]="activeTab === 'footer'" (click)="setActiveTab('footer')">Footer</button>
+      <button [class.active]="activeTab === 'header'" (click)="setActiveTab('header')">Navigation</button>
+    </div>
+  
+    <form [formGroup]="configForm" (ngSubmit)="saveConfig()">
+      <!-- Persönliche Informationen -->
+      <div class="tab-content" *ngIf="activeTab === 'personal'">
+        <h2>Persönliche Informationen</h2>
+        <div formGroupName="personal">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" formControlName="name">
+          </div>
+          <div class="form-group">
+            <label for="role">Berufsbezeichnung</label>
+            <input type="text" id="role" formControlName="role">
+          </div>
+          <div class="form-group">
+            <label for="tagline">Tagline</label>
+            <input type="text" id="tagline" formControlName="tagline">
+          </div>
+          <div class="form-group">
+            <label for="birthdate">Geburtsdatum</label>
+            <input type="text" id="birthdate" formControlName="birthdate">
+          </div>
+          <div class="form-group">
+            <label for="email">E-Mail</label>
+            <input type="email" id="email" formControlName="email">
+          </div>
+          <div class="form-group">
+            <label for="location">Standort</label>
+            <input type="text" id="location" formControlName="location">
+          </div>
+          <div class="form-group">
+            <label for="github">GitHub-Benutzername</label>
+            <input type="text" id="github" formControlName="github">
+          </div>
+          <div class="form-group">
+            <label for="linkedin">LinkedIn-Benutzername</label>
+            <input type="text" id="linkedin" formControlName="linkedin">
+          </div>
+          <div class="form-group">
+            <label for="xing">XING-Benutzername</label>
+            <input type="text" id="xing" formControlName="xing">
+          </div>
+        </div>
+      </div>
+  
+      <!-- Startseite -->
+      <div class="tab-content" *ngIf="activeTab === 'home'">
+        <h2>Startseite</h2>
+        <div formGroupName="home">
+          <div class="form-group">
+            <label for="greetingPrefix">Begrüßung</label>
+            <input type="text" id="greetingPrefix" formControlName="greetingPrefix">
+          </div>
+          <div class="form-group">
+            <label for="headlinePrefix">Überschrift (Beginn)</label>
+            <input type="text" id="headlinePrefix" formControlName="headlinePrefix">
+          </div>
+          <div class="form-group">
+            <label for="headlineHighlight">Überschrift (Hervorgehoben)</label>
+            <input type="text" id="headlineHighlight" formControlName="headlineHighlight">
+          </div>
+          <div class="form-group">
+            <label for="headlineSuffix">Überschrift (Ende)</label>
+            <input type="text" id="headlineSuffix" formControlName="headlineSuffix">
+          </div>
+          <div class="form-group">
+            <label for="biography">Biographie/Einleitung</label>
+            <textarea id="biography" formControlName="biography" rows="4"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="ctaPrimaryText">Button 1 Text</label>
+            <input type="text" id="ctaPrimaryText" formControlName="ctaPrimaryText">
+          </div>
+          <div class="form-group">
+            <label for="ctaSecondaryText">Button 2 Text</label>
+            <input type="text" id="ctaSecondaryText" formControlName="ctaSecondaryText">
+          </div>
+          
+          <h3>Statistik 1</h3>
+          <div class="form-group">
+            <label for="stat0Value">Wert</label>
+            <input type="text" id="stat0Value" formControlName="stat0Value">
+          </div>
+          <div class="form-group">
+            <label for="stat0Label">Beschriftung</label>
+            <input type="text" id="stat0Label" formControlName="stat0Label">
+          </div>
+          
+          <h3>Statistik 2</h3>
+          <div class="form-group">
+            <label for="stat1Value">Wert</label>
+            <input type="text" id="stat1Value" formControlName="stat1Value">
+          </div>
+          <div class="form-group">
+            <label for="stat1Label">Beschriftung</label>
+            <input type="text" id="stat1Label" formControlName="stat1Label">
+          </div>
+        </div>
+      </div>
+  
+      <!-- Über mich -->
+      <div class="tab-content" *ngIf="activeTab === 'about'">
+        <h2>Über mich</h2>
+        <div formGroupName="about">
+          <div class="form-group">
+            <label for="aboutTitle">Titel</label>
+            <input type="text" id="aboutTitle" formControlName="title">
+          </div>
+          <div class="form-group">
+            <label for="aboutIntroduction">Einleitung</label>
+            <textarea id="aboutIntroduction" formControlName="introduction" rows="4"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="aboutBio1">Biographie (Absatz 1)</label>
+            <textarea id="aboutBio1" formControlName="bio1" rows="4"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="aboutBio2">Biographie (Absatz 2)</label>
+            <textarea id="aboutBio2" formControlName="bio2" rows="4"></textarea>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Projekte -->
+      <div class="tab-content" *ngIf="activeTab === 'projects'">
+        <h2>Projekte</h2>
+        <div formGroupName="projects">
+          <div class="form-group">
+            <label for="projectsTitle">Titel</label>
+            <input type="text" id="projectsTitle" formControlName="title">
+          </div>
+          <div class="form-group">
+            <label for="projectsIntroduction">Einleitung</label>
+            <textarea id="projectsIntroduction" formControlName="introduction" rows="4"></textarea>
+          </div>
+        </div>
+        <p class="note">Hinweis: Einzelne Projekte können derzeit nur im Code bearbeitet werden.</p>
+      </div>
+  
+      <!-- Fähigkeiten -->
+      <div class="tab-content" *ngIf="activeTab === 'skills'">
+        <h2>Fähigkeiten</h2>
+        <div formGroupName="skills">
+          <div class="form-group">
+            <label for="skillsTitle">Titel</label>
+            <input type="text" id="skillsTitle" formControlName="title">
+          </div>
+          <div class="form-group">
+            <label for="skillsIntroduction">Einleitung</label>
+            <textarea id="skillsIntroduction" formControlName="introduction" rows="4"></textarea>
+          </div>
+        </div>
+        <p class="note">Hinweis: Einzelne Fähigkeiten können derzeit nur im Code bearbeitet werden.</p>
+      </div>
+  
+      <!-- Footer -->
+      <div class="tab-content" *ngIf="activeTab === 'footer'">
+        <h2>Footer</h2>
+        <div formGroupName="footer">
+          <div class="form-group">
+            <label for="footerTagline">Tagline</label>
+            <input type="text" id="footerTagline" formControlName="tagline">
+          </div>
+          <div class="form-group">
+            <label for="footerCredits">Copyright/Credits</label>
+            <input type="text" id="footerCredits" formControlName="credits">
+          </div>
+        </div>
+      </div>
+  
+      <!-- Navigation -->
+      <div class="tab-content" *ngIf="activeTab === 'header'">
+        <h2>Navigation</h2>
+        <div formGroupName="header">
+          <div class="form-group">
+            <label for="navHome">Startseite</label>
+            <input type="text" id="navHome" formControlName="navHome">
+          </div>
+          <div class="form-group">
+            <label for="navAbout">Über mich</label>
+            <input type="text" id="navAbout" formControlName="navAbout">
+          </div>
+          <div class="form-group">
+            <label for="navSkills">Fähigkeiten</label>
+            <input type="text" id="navSkills" formControlName="navSkills">
+          </div>
+          <div class="form-group">
+            <label for="navProjects">Projekte</label>
+            <input type="text" id="navProjects" formControlName="navProjects">
+          </div>
+        </div>
+      </div>
+  
+      <div class="form-actions">
+        <button type="submit" class="save-button">Speichern</button>
+      </div>
+    </form>
+  </div>

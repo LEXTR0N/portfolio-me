@@ -1,27 +1,34 @@
 // src/app/config/about-config.ts
+import { inject } from '@angular/core';
+import { ConfigService } from '../services/config.service';
 import { PersonalConfig } from './personal-config';
 
+// Get config from the config service
+const configService = inject(ConfigService);
+const externalConfig = configService.getConfig();
+
 export const AboutConfig = {
-  title: "About Me",
-  introduction: `Hello! I'm ${PersonalConfig.name}, a passionate Software Developer specializing in innovative digital solutions. From my home base in Hambach, I develop efficient and user-centered applications that combine technical excellence with intuitive design. Below you'll find an overview of the skills I've developed throughout my professional journey.`,
+  title: externalConfig?.about?.title || 'ABOUT_TITLE',
+  introduction: externalConfig?.about?.introduction?.replace('{name}', PersonalConfig.name) || 
+    `Hello! I'm ${PersonalConfig.name}, ABOUT_INTRODUCTION`,
   profile: {
     name: PersonalConfig.name,
-    role: "Software Developer",
+    role: PersonalConfig.role,
     image: PersonalConfig.images.profile,
-    contactInfo: [
-      { label: "Email", value: "jonas.eck55@gmail.com" },
-      { label: "Location", value: "Hambach, Germany" },
-      { label: "Birthday", value: "September 4, 2000" }
+    contactInfo: externalConfig?.about?.profile?.contactInfo || [
+      { label: "Email", value: PersonalConfig.contact.email },
+      { label: "Location", value: PersonalConfig.contact.location },
+      { label: "Birthday", value: PersonalConfig.birthdate }
     ],
-    bio: [
-      "I started my journey in tech with a deep curiosity about how software works. After starting my Informatics studies at the Technical University of Würzburg-Schweinfurt, I've worked with the Deutsche Rentenversicherung Bund as a dual student to develop solutions that combine robust backend systems with intuitive frontend interfaces.",
-      "My background in practical work has taught me the value of attention to detail and teamwork. I'm particularly interested in full-stack development using Java and Angular, and I enjoy applying my skills to create high-performance applications."
+    bio: externalConfig?.about?.profile?.bio || [
+      'ABOUT_BIO_1',
+      'ABOUT_BIO_2'
     ]
   },
   sectionTabs: {
-    education: "Education",
-    experience: "Experience",
-    personal: "Personal"
+    education: externalConfig?.about?.sectionTabs?.education || 'Education',
+    experience: externalConfig?.about?.sectionTabs?.experience || 'Experience',
+    personal: externalConfig?.about?.sectionTabs?.personal || 'Personal'
   },
   experience: [
     {

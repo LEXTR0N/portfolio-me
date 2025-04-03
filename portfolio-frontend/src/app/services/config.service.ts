@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 export interface PersonalConfig {
   name: string;
@@ -24,6 +25,12 @@ export interface PersonalConfig {
     logoLight: string;
     logoDark: string;
   };
+  home?: any;
+  about?: any;
+  skills?: any;
+  projects?: any;
+  footer?: any;
+  header?: any;
 }
 
 @Injectable({
@@ -31,12 +38,16 @@ export interface PersonalConfig {
 })
 export class ConfigService {
   private configUrl = 'assets/config.json';
+  private apiUrl = environment.apiUrl;
+  
   private configData: PersonalConfig | null = null;
   private configSubject = new BehaviorSubject<PersonalConfig | null>(null);
   
   config$ = this.configSubject.asObservable();
   
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.loadConfig().subscribe();
+  }
   
   loadConfig(): Observable<PersonalConfig> {
     return this.http.get<PersonalConfig>(this.configUrl).pipe(
@@ -49,5 +60,9 @@ export class ConfigService {
   
   getConfig(): PersonalConfig | null {
     return this.configData;
+  }
+  
+  updateConfig(configData: PersonalConfig): Observable<any> {
+    return this.http.post(`${this.apiUrl}/config`, configData);
   }
 }

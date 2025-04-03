@@ -18,7 +18,7 @@ RUN find . -type f -name "*.json" -exec sed -i 's/reach-me-portfolio/portfolio-f
 RUN npm run build
 
 # Build the backend
-FROM golang:1.22-alpine as backend-builder
+FROM golang:1.24.2-alpine as backend-builder
 
 WORKDIR /app/backend
 
@@ -50,11 +50,18 @@ RUN apk --no-cache add ca-certificates
 COPY --from=backend-builder /app/backend/portfolio-backend /app/
 COPY --from=backend-builder /app/backend/dist /app/dist
 
+# Copy entrypoint script
+COPY entrypoint.sh /app/
+RUN chmod +x /app/entrypoint.sh
+
 # Create a data directory if needed
 RUN mkdir -p /app/data
 
 # Expose the server port
 EXPOSE 8080
+
+# Set entrypoint to generate config
+ENTRYPOINT ["/app/entrypoint.sh"]
 
 # Run the application
 CMD ["/app/portfolio-backend"]

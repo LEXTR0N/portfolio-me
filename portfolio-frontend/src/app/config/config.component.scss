@@ -1,0 +1,201 @@
+// src/app/pages/config/config.component.scss
+@use '../../../scss/breakpoints' as b;
+
+.config-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+  
+  @include b.breakpoint-down('md') {
+    padding: 1.5rem;
+  }
+  
+  @include b.breakpoint-down('sm') {
+    padding: 1rem;
+  }
+}
+
+.config-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+    
+    @include b.breakpoint-down('md') {
+      font-size: 2rem;
+    }
+  }
+  
+  p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    
+    @include b.breakpoint-down('md') {
+      font-size: 1rem;
+    }
+  }
+}
+
+.alert {
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  
+  &.alert-success {
+    background-color: rgba(46, 204, 113, 0.1);
+    border: 1px solid rgba(46, 204, 113, 0.3);
+    color: #2ecc71;
+  }
+  
+  &.alert-error {
+    background-color: rgba(231, 76, 60, 0.1);
+    border: 1px solid rgba(231, 76, 60, 0.3);
+    color: #e74c3c;
+  }
+}
+
+.config-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1rem;
+  
+  @include b.breakpoint-down('md') {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 0.5rem;
+  }
+  
+  button {
+    background: none;
+    border: none;
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    
+    &:hover {
+      color: var(--accent);
+      background-color: var(--background-dark);
+    }
+    
+    &.active {
+      background: var(--accent-gradient);
+      color: white;
+    }
+  }
+}
+
+.tab-content {
+  margin-bottom: 2rem;
+  
+  h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    position: relative;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -0.5rem;
+      left: 0;
+      width: 4rem;
+      height: 3px;
+      background: var(--accent-gradient);
+      border-radius: 3px;
+    }
+    
+    @include b.breakpoint-down('md') {
+      font-size: 1.5rem;
+    }
+  }
+  
+  h3 {
+    font-size: 1.3rem;
+    margin: 1.5rem 0 1rem;
+    color: var(--text-primary);
+    
+    @include b.breakpoint-down('md') {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+  
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+  
+  input,
+  textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background-color: var(--background-card);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    
+    &:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+    }
+  }
+  
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+}
+
+.form-actions {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: flex-end;
+  
+  @include b.breakpoint-down('sm') {
+    justify-content: center;
+  }
+  
+  .save-button {
+    padding: 0.8rem 2rem;
+    background: var(--accent-gradient);
+    color: white;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+    
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 18px rgba(52, 152, 219, 0.4);
+    }
+  }
+}
+
+.note {
+  margin-top: 1rem;
+  color: var(--text-light);
+  font-style: italic;
+  font-size: 0.9rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--accent);
+}

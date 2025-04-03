@@ -1,5 +1,11 @@
 // src/app/config/header-config.ts
+import { inject } from '@angular/core';
+import { ConfigService } from '../services/config.service';
 import { PersonalConfig } from './personal-config';
+
+// Get config from the config service
+const configService = inject(ConfigService);
+const externalConfig = configService.getConfig();
 
 export const HeaderConfig = {
   // Light Mode Logo
@@ -17,9 +23,9 @@ export const HeaderConfig = {
     height: 80
   },
   navigation: {
-    home: 'Home',
-    projects: 'Projects', 
-    about: 'About',
-    skills: 'Skills'
+    home: externalConfig?.header?.navigation?.home || 'Home',
+    projects: externalConfig?.header?.navigation?.projects || 'Projects', 
+    about: externalConfig?.header?.navigation?.about || 'About',
+    skills: externalConfig?.header?.navigation?.skills || 'Skills'
   }
 };
